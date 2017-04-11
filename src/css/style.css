@@ -1,0 +1,40 @@
+﻿body {
+    padding: 20px;
+}
+
+.game {
+    width: 100%;
+    
+}
+
+.tile {
+    border:1px solid #808080;
+    height:100px;
+    padding-top: 5px;
+    padding-left: 10px;
+    font-size: 25px;
+    font-family: Euphemia, Arial, 'Myriad Pro';
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+.tile.disabled {
+    background-color: antiquewhite !important;
+}
+
+.tile.disabled.x-won {
+    background-color: darkseagreen !important;
+}
+
+.tile.disabled.o-won {
+    background-color: darkorange !important;
+}
+
+.tile:hover {
+    background-color:aqua;
+}
+
+.margin-2 {
+    margin: 2px;
+}
