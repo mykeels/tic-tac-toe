@@ -1,10 +1,13 @@
 var express = require('express')
 var path = require('path')
 var favicon = require('serve-favicon')
+var port = process.env.PORT || 8080
 
 var app = express()
 
-app.listen(3000);
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+})
 
 app.use(express.static('src'))
 
