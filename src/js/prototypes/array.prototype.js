@@ -14,7 +14,6 @@ function syncArrays(collector, giver, prop) {
     }
 }
 
-
 function createEvent(name, obj) {
     var evt = document.createEvent("Event");
     evt.initEvent(name, true, true);
