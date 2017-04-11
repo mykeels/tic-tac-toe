@@ -26,14 +26,15 @@
                     <input type="button" value="New Game" ng-click="localGame()" />&nbsp;&nbsp;
                     <!--Play Network:
                     <input type="button" value="{{network_btn}}" ng-click="networkGame()" />&nbsp;&nbsp;-->
-                    Score:&nbsp;
-                    X:<span ng-bind="score.x"></span>&nbsp;O:<span ng-bind="score.o"></span>
                 </h4>
+                <h4>Score:&nbsp;
+                    X:<span ng-bind="score.x"></span>&nbsp;O:<span ng-bind="score.o"></span></h4>
             </div>
         </div>
+        <center>
         <div class="row game">
             <div class="row" ng-repeat="row in tiles track by $index">
-                <div class="col-xs-3 tile margin-2 {{column != '0'.toNumber() ? 'disabled' : ''}} {{(column == 30) ? 'x-won' : '' }} {{(column == 50) ? 'o-won' : '' }}" ng-repeat="column in row track by $index"
+                <div class="col-xs-3 tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'padding-top': Math.floor(Math.min(getTileHeight(tiles.length), 170) / 4) + 'px' }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
                      ng-click="play($index, $parent.$index);calcGame()">
                     <span ng-if="column == 0"></span>
                     <span ng-if="column == 3 || column == 30">X<!--<small>{{column}}</small>--></span>
@@ -44,8 +45,13 @@
                 <div class="col-sm-12" ng-repeat="m in messages track by $index">Server Message: {{m}}</div>
             </div>
         </div>
+        </center>
     </div>
 
-
+    <script>
+        $(window).resize(function () {
+            angular.element("[ng-controller='GameCtrl']").scope().$applyAsync();
+        })
+    </script>
 </body>
 </html>

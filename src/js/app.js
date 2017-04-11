@@ -8,6 +8,8 @@ app.controller("GameCtrl", function ($scope) {
     $scope.game_type = "local";
     $scope.your_turn = true;
     $scope.network_btn = "Network Game";
+    $scope.getTileHeight = (length) => Math.ceil(Math.ceil(screen.width * (length < 6 ? 0.85 : (length < 9 ? 0.8 : 0.75))) / length);
+    $scope.getTileWidth = (length) => 'calc(' + Math.floor(100 / length) + '% - 4px)';
     $scope.changeTiles = function () {
         var a1 = [];
         for (var i = 0; i < $scope.size; i++) {
@@ -129,4 +131,5 @@ app.controller("GameCtrl", function ($scope) {
             }
         }
     }
+    $scope.Math = Math;
 });

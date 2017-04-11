@@ -4,19 +4,16 @@
 
 .game {
     width: 100%;
-    
 }
 
 .tile {
     border:1px solid #808080;
     height:100px;
-    padding-top: 5px;
-    padding-left: 10px;
-    font-size: 25px;
+    font-size: 300%;
     font-family: Euphemia, Arial, 'Myriad Pro';
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    max-width: 170px;
+    max-height: 170px;
 }
 
 .tile.disabled {
