@@ -1,8 +1,8 @@
-const Board = require("board")
-const BoardState = require("board-state")
-const Pivot = require("pivot")
-const Game = require("game")
-const Tile = require("tile")
+const Board = require("./board")
+const BoardState = require("./board-state")
+const Pivot = require("./pivot")
+const Game = require("./game")
+const Tile = require("./tile")
 
 let BoardMove = function () {
     this.selectBestMove = function (board, tile) {

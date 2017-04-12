@@ -4,7 +4,7 @@
   "description": "A javascript implementation of the popular tic-tac-toe game",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node index.js"
   },
   "repository": {

@@ -1,8 +1,8 @@
-const Board = require("board");
-const BoardState = require("board-state");
-const Tile = require("tile")
+const Board = require("./board");
+const BoardState = require("./board-state");
+const Tile = require("./tile")
 
-let Pivot = function (x, y) {
+const Pivot = function (x, y) {
     this.x = x || 0;
     this.y = y || 0;
 }

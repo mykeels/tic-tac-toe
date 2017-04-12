@@ -1,7 +1,7 @@
-const Board = require("board")
-const Tile = require("tile")
-const Pivot = require("pivot")
-const Game = require("game")
+const Board = require("./board")
+const Tile = require("./tile")
+const Pivot = require("./pivot")
+const Game = require("./game")
 
 var BoardState = function (board) {
     board = board || {}
@@ -126,24 +126,6 @@ let calcBottom = (board, pivot) => {
     }
     else if (prod == Game.OWON) {
         board[y + 1][x - 1] = board[y + 1][x] = board[y + 1][x + 1] = Tile.OInvalid;
-        return Tile.O;
-    }
-    return Tile.Blank;
-}
-
-let calcHorizontalMiddle = (board, pivot) => {
-    let x = pivot.x, y = pivot.y;
-    let a = board[y][x - 1],
-        b = board[y][x],
-        c = board[y][x + 1];
-    
-    let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
-        board[y][x - 1] = board[y][x] = board[y][x + 1] = Tile.XInvalid;
-        return Tile.X;
-    }
-    else if (prod == Game.OWON) {
-        board[y][x - 1] = board[y][x] = board[y][x + 1] = Tile.OInvalid;
         return Tile.O;
     }
     return Tile.Blank;

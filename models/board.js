@@ -1,7 +1,7 @@
-const Tile = require("tile");
-const BoardState = require("board-state");
+const Tile = require("./tile");
+const BoardState = require("./board-state");
 
-let Board = (entry) => {
+const Board = function (entry) {
     let board = []; //private
     let size = 0;
     if (Array.isArray(entry)) {
@@ -49,6 +49,12 @@ let Board = (entry) => {
             ret.push(row);
         }
         return ret;
+    }
+    this.width = function () {
+        return board.length;
+    }
+    this.height = function () {
+        return board[0].length;
     }
 }
 
