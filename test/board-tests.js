@@ -209,3 +209,11 @@ describe("Test That Player O Wins On Middle Horizontal Side of 3x3 Board", funct
         assert.equal(state.oWinCount, 1);
     })
 })
+
+describe("Test That Board Print Works", function () {
+    const oWinData = require("../data/scores/o-middle-horizontal-win.json");
+    it("should print out the board", function () {
+        let board = new Board(3);
+        console.log(board.toString());
+    })
+})

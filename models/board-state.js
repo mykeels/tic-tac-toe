@@ -1,9 +1,9 @@
-const Board = require("./board")
+
 const Tile = require("./tile")
 const Pivot = require("./pivot")
 const Game = require("./game")
 
-var BoardState = function (board) {
+let BoardState = function (board) {
     board = board || {}
     this.size = board.length || 0;
     this.xWinCount = 0;
@@ -16,13 +16,16 @@ var BoardState = function (board) {
 }
 
 BoardState.checkWin = (board, pivot, player) => {
+    const Board = require("./board")
+    let gameBoard = (Array.isArray(board) || !!Number(board)) ? new Board(board) : board;
+
     let blankTile = board[pivot.y][pivot.x];
     
-    let score = (new Board(board)).getState().getScore(player);
-    board.play(player, pivot.y, pivot.x);
+    let score = gameBoard.getState().getScore(player);
+    gameBoard.play(player, pivot.y, pivot.x);
 
-    let isWin = (new Board(board)).getState().getScore(player) > score;
-    board.play(blankTile, pivot.y, pivot.x);
+    let isWin = gameBoard.getState().getScore(player) > score;
+    gameBoard.play(blankTile, pivot.y, pivot.x);
 
     return isWin;
 }
