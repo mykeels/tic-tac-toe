@@ -64,8 +64,8 @@
                         <div class="col-xs-3 tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'padding-top': Math.floor(Math.min(getTileHeight(tiles.length), 170) / 4) + 'px' }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
                             ng-click="play($index, $parent.$index);calcGame()">
                             <span ng-if="column == 0"></span>
-                            <span ng-if="column == 3 || column == 30">X<!--<small>{{column}}</small>--></span>
-                            <span ng-if="column == 5 || column == 50">O<!--<small>{{column}}</small>--></span>
+                            <span ng-if="column == 3 || column == 30" class="tile-x">X<!--<small>{{column}}</small>--></span>
+                            <span ng-if="column == 5 || column == 50" class="tile-o">O<!--<small>{{column}}</small>--></span>
                         </div>
                     </div>
                     <div class="row">

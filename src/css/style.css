@@ -88,18 +88,34 @@ background: linear-gradient(bottom left, #2e68a7, #30a48f); /*Standard*/
     max-width: 150px;
     max-height: 150px;
     margin: 5px;
+    border: 2px outset #6EA4BC;
 }
 
 .tile.disabled {
-    background-color: antiquewhite !important;
+    background-color: #ACD1D7 !important;
+    color: #fff;
+    font-size: 60px;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
 }
-
+.tile-x {
+    color: #2E69A7;
+}
+.tile-o {
+    color: #2C9394;
+}
 .tile.disabled.x-won {
-    background-color: darkseagreen !important;
+   background-color: #2E69A7 !important;
+   border: 1px #fff outset;
+}
+.tile.disabled.x-won .tile-x, .tile.disabled.o-won .tile-o {
+   color: #fff !important;
 }
 
 .tile.disabled.o-won {
-    background-color: darkorange !important;
+    background-color: #2C9394 !important;
+    border: 1px #fff outset;
 }
 
 .tile:hover {
