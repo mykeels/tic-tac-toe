@@ -16,6 +16,7 @@
     <meta name="twitter:title" content="Advanced Tic Tac Toe Game" />
     <meta name="twitter:description" content="A javascript implementation of the popular tic-tac-toe game with board sizes of up to 12" />
     <meta name="twitter:url" content="https://x-tic-tac-o.herokuapp.com/" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <script src="js/jquery-2.1.4.min.js"></script>
@@ -29,34 +30,51 @@
 <body ng-app="TicTacToe" ng-controller="GameCtrl">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
-                <h4>
-                    Board Size:
-                    <input type="number" min="3" max="12" ng-model="size" ng-change="changeTiles()" />&nbsp;&nbsp;
-                    <!--Play Local:-->
-                    <input type="button" value="New Game" ng-click="localGame()" />&nbsp;&nbsp;
-                    <!--Play Network:
-                    <input type="button" value="{{network_btn}}" ng-click="networkGame()" />&nbsp;&nbsp;-->
-                </h4>
-                <h4>Score:&nbsp;
-                    X:<span ng-bind="score.x"></span>&nbsp;O:<span ng-bind="score.o"></span></h4>
-            </div>
-        </div>
-        <center>
-        <div class="row game">
-            <div class="row" ng-repeat="row in tiles track by $index">
-                <div class="col-xs-3 tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'padding-top': Math.floor(Math.min(getTileHeight(tiles.length), 170) / 4) + 'px' }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
-                     ng-click="play($index, $parent.$index);calcGame()">
-                    <span ng-if="column == 0"></span>
-                    <span ng-if="column == 3 || column == 30">X<!--<small>{{column}}</small>--></span>
-                    <span ng-if="column == 5 || column == 50">O<!--<small>{{column}}</small>--></span>
+            <!-- left side -->
+            <div class="col-md-3">
+                <div class="board-size">
+                    <label>Board Size </label> <input type="number" min="3" max="12" ng-model="size" ng-change="changeTiles()" />
+                    <div class="margin-top">
+                        <p class="no-margin">Score</p>
+                        <div class="row no-margin score-box">
+                            <div class="col-xs-6 first">
+                                <h1>X:</h1>
+                            </div>
+                            <div class="col-xs-6 second">
+                                <h1>{{score.x}}</h1>
+                            </div>
+                            <div class="col-xs-6 third">
+                                <h1>Y:</h1>
+                            </div>
+                            <div class="col-xs-6 fourth">
+                                <h1>{{score.o}}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-game-box">
+                        <button class="btn btn-new-game btn-block" ng-click="localGame()" >New Game</button>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12" ng-repeat="m in messages track by $index">Server Message: {{m}}</div>
+            <!-- left side ends-->
+            <div class="col-md-9">
+                <!-- right side begins -->
+                <div class="row game">
+                    <div class="row" ng-repeat="row in tiles track by $index">
+                        <div class="col-xs-3 tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'padding-top': Math.floor(Math.min(getTileHeight(tiles.length), 170) / 4) + 'px' }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
+                            ng-click="play($index, $parent.$index);calcGame()">
+                            <span ng-if="column == 0"></span>
+                            <span ng-if="column == 3 || column == 30" class="tile-x">X<!--<small>{{column}}</small>--></span>
+                            <span ng-if="column == 5 || column == 50" class="tile-o">O<!--<small>{{column}}</small>--></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" ng-repeat="m in messages track by $index">Server Message: {{m}}</div>
+                    </div>
+                </div>
+                <!-- right side ends -->
             </div>
         </div>
-        </center>
     </div>
 
     <script>
