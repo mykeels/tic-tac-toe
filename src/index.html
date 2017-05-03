@@ -27,7 +27,7 @@
     <script src="js/controllers/main.ctrl.js"></script>
     <script src="js/app.js"></script>
 </head>
-<body ng-app="TicTacToe" ng-controller="GameCtrl" ng-init="localGame()">
+<body ng-app="TicTacToe" ng-controller="GameCtrl" ng-init="newGame()">
     <div class="container">
         <div class="row">
             <!-- left side -->
@@ -44,7 +44,7 @@
                                 <h1>{{score.x}}</h1>
                             </div>
                             <div class="col-xs-6 third">
-                                <h1>Y:</h1>
+                                <h1>O:</h1>
                             </div>
                             <div class="col-xs-6 fourth">
                                 <h1>{{score.o}}</h1>
@@ -52,7 +52,13 @@
                         </div>
                     </div>
                     <div class="new-game-box">
-                        <button class="btn btn-new-game btn-block" ng-click="localGame()" >New Game</button>
+                        <button class="btn btn-new-game btn-block" ng-click="newGame()" >New Game</button><br>
+                        <div>
+                            <label><input type="radio" name="game_type" value="local" ng-model="begin_game_type" ng-click="newGame()"> Human</label>
+                        </div>
+                        <div>
+                            <label><input type="radio" name="game_type" value="bot" ng-model="begin_game_type" ng-click="newGame()"> Bot</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,6 +87,14 @@
         $(window).resize(function () {
             angular.element("[ng-controller='GameCtrl']").scope().$applyAsync();
         })
+
+        var rootUrl = function (url) {
+            return "/" + url;
+        }
+
+        var apiRootUrl = function (url) {
+            return "/" + url;
+        }
     </script>
 </body>
 </html>

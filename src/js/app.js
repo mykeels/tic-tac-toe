@@ -1,11 +1,13 @@
 var app = angular.module("TicTacToe", []);
-app.controller("GameCtrl", function ($scope) {
+
+app.controller("GameCtrl", function ($scope, $http) {
     $scope.socket = null;
     $scope.messages = [];
     $scope.size = 3;
     $scope.tiles = [];
     $scope.score = { x: 0, o: 0 }
-    $scope.game_type = "local";
+    $scope.begin_game_type = "bot";
+    $scope.game_type = null;
     $scope.your_turn = true;
     $scope.network_btn = "Network Game";
     $scope.getTileHeight = (length) => Math.ceil(Math.ceil(screen.width * (length < 6 ? 0.35 : (length < 9 ? 0.32 : 0.3))) / length);
@@ -24,7 +26,7 @@ app.controller("GameCtrl", function ($scope) {
         $scope.tiles = a1;
         return a1;
     }
-    $scope.newGame = function () {
+    $scope.renewTiles = function () {
         $scope.changeTiles();
         for (var i = 0; i < $scope.size; i++) {
             for (var j = 0; j < $scope.size; j++) {
@@ -39,26 +41,67 @@ app.controller("GameCtrl", function ($scope) {
             $scope.game_type = "network";
         }
         else {
-            $scope.newGame();
+            $scope.renewTiles();
             $scope.socket.send(new RequestMessage(MessageType.NewGame, $scope.size).toJson());
         }
     }
     $scope.localGame = function () {
-        $scope.game_type = "local";
         $scope.your_turn = true;
-        $scope.newGame();
+        $scope.renewTiles();
     }
+    $scope.newGame = function () {
+        $scope.game_type = $scope.begin_game_type;
+        if ($scope.game_type == "bot") $scope.nextplay = "X";
+        $scope.changeTiles();
+        switch ($scope.game_type) {
+            case "bot":
+                console.log("%c BOT game begins!", "color: #FFAA00");
+            case "local":
+                $scope.localGame();
+                break;
+            case "network":
+                $scope.networkGame();
+                break;
+            default:
+                console.error("Invalid Selection");
+                break;
+        }
+        $scope.$applyAsync();
+    }
+
     $scope.nextplay = "X";
     $scope.play = function (x, y) {
-        if ($scope.your_turn) {
-            $scope.makeplay(x, y);
-            $scope.socket.send(new RequestMessage(MessageType.MakePlay, { x: x, y: y }).toJson());
-            if ($scope.game_type == "network") $scope.your_turn = false;
+        if ($scope.your_turn && $scope.makeplay(x, y)) {
+            if ($scope.game_type == "network") {
+                $scope.socket.send(new RequestMessage(MessageType.MakePlay, { x: x, y: y }).toJson());
+                $scope.your_turn = false;
+            }
+            else if ($scope.game_type == "bot") {
+                console.log($scope.getNextPlayer())
+                $http.post(apiRootUrl("api/move"), {
+                    board: JSON.stringify($scope.tiles),
+                    player: $scope.getNextPlayer()
+                }).success(function (data) {
+                    console.log(data);
+                    $scope.your_turn = true;
+                    if (data.pivot) {
+                        $scope.makeplay(data.pivot.x, data.pivot.y);
+                    }
+                    else console.warn("data.pivot is null", data);
+                }).error(function (err) {
+                    console.error(err);
+                });
+                $scope.your_turn = false;
+            }
             //toastr["success"]("You have played " + { x: x, y: y }.toJson());
         }
     }
+    $scope.getNextPlayer = function () {
+        return $scope.nextplay == "X" ? 3 : 5;
+    }
     $scope.makeplay = function (x, y) {
-        if ($scope.tiles[y][x] == 0) {
+        var isValidPlay = $scope.tiles[y][x] == 0;
+        if (isValidPlay) {
             if ($scope.nextplay == "X") {
                 $scope.nextplay = "O";
                 $scope.tiles[y][x] = 3;//3 means 'X';
@@ -67,8 +110,10 @@ app.controller("GameCtrl", function ($scope) {
                 $scope.nextplay = "X";
                 $scope.tiles[y][x] = 5; //5 means 'O'
             }
+            $scope.calcGame();
+            return true;
         }
-        $scope.calcGame();
+        else return false;
     }
     $scope.calcGame = function () {
         var score = calcScore($scope.tiles, $scope.score.x, $scope.score.o);
@@ -93,7 +138,7 @@ app.controller("GameCtrl", function ($scope) {
             console.log(msg);
             $scope.messages.add(msg);
             if (msg.message_type == 0 && msg.message == true) {
-                $scope.newGame();
+                $scope.renewTiles();
                 $scope.$apply();
                 $scope.messages.add("You have started a new game");
                 //toastr["success"]("You have started a new game");
@@ -103,7 +148,7 @@ app.controller("GameCtrl", function ($scope) {
                     $scope.size = msg.message;
                 }
                 $scope.$apply();
-                $scope.newGame();
+                $scope.renewTiles();
                 $scope.$apply();
                 $scope.messages.add("A user has joined this game");
                 $scope.$apply();
@@ -119,7 +164,7 @@ app.controller("GameCtrl", function ($scope) {
                 if (msg.message != null && !Number.isNaN(Number(msg.message))) {
                     $scope.size = msg.message;
                 }
-                $scope.newGame();
+                $scope.renewTiles();
                 $scope.$apply();
             }
             else if (msg.message_type == 4) {
