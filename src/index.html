@@ -27,13 +27,13 @@
     <script src="js/controllers/main.ctrl.js"></script>
     <script src="js/app.js"></script>
 </head>
-<body ng-app="TicTacToe" ng-controller="GameCtrl">
+<body ng-app="TicTacToe" ng-controller="GameCtrl" ng-init="localGame()">
     <div class="container">
         <div class="row">
             <!-- left side -->
             <div class="col-md-3">
                 <div class="board-size">
-                    <label>Board Size </label> <input type="number" min="3" max="12" ng-model="size" ng-change="changeTiles()" />
+                    <label>Board Size </label> <input type="number" min="3" max="10" ng-model="size" ng-change="changeTiles()" />
                     <div class="margin-top">
                         <p class="no-margin">Score</p>
                         <div class="row no-margin score-box">
@@ -61,7 +61,7 @@
                 <!-- right side begins -->
                 <div class="row game">
                     <div class="row" ng-repeat="row in tiles track by $index">
-                        <div class="col-xs-3 tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'padding-top': Math.floor(Math.min(getTileHeight(tiles.length), 170) / 4) + 'px' }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
+                        <div class="col-xs-3 tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'padding-top': Math.floor(Math.min(getTileHeight(tiles.length), 170) / 4) + 'px', 'font-size': getFontSize(tiles.length) }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
                             ng-click="play($index, $parent.$index);calcGame()">
                             <span ng-if="column == 0"></span>
                             <span ng-if="column == 3 || column == 30" class="tile-x">X<!--<small>{{column}}</small>--></span>

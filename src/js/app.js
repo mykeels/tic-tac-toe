@@ -8,8 +8,19 @@ app.controller("GameCtrl", function ($scope) {
     $scope.game_type = "local";
     $scope.your_turn = true;
     $scope.network_btn = "Network Game";
-    $scope.getTileHeight = (length) => Math.ceil(Math.ceil(screen.width * (length < 6 ? 0.85 : (length < 9 ? 0.8 : 0.75))) / length);
-    $scope.getTileWidth = (length) => 'calc(' + Math.floor(100 / length) + '% - 4px)';
+    $scope.getTileHeight = (length) => Math.ceil(Math.ceil(screen.width * (length < 6 ? 0.35 : (length < 9 ? 0.32 : 0.3))) / length);
+    $scope.getTileWidth = (length) => 'calc(' + Math.floor(75 / length) + '% - 4px)';
+    $scope.getFontSize = (length) => $scope.tileFontSizes[length] || 60;
+    $scope.tileFontSizes = { 
+        3: 50,
+        4: 42,
+        5: 32,
+        6: 22,
+        7: 21,
+        8: 18,
+        9: 15,
+        10: 12
+    }
     $scope.changeTiles = function () {
         var a1 = [];
         for (var i = 0; i < $scope.size; i++) {
