@@ -44,22 +44,31 @@ let getFitness = (board, pivot, player) => {
 let selectBest = function (board, tile) {
     let max = 0;
     let bestPivot = null;
-    for (let row = 0; row < board.length; row++) {
-        for (let col = 0; col < board[0].length; col++) {
-            if (board[row][col] == Tile.Blank) {
-                let fitnessValue = getFitness(board, new Pivot(col, row), tile);
-                if (fitnessValue > max) {
-                    max = fitnessValue;
-                    bestPivot = new Pivot(col, row);
+    if (Pivot.getEmptyPoints(board).length >= (board.length * board[0].length) - 1) {
+        //board has one play at most
+        //let col = Math.floor(Math.random() * board[0].length);
+        //let row = Math.floor(Math.random() * board.length);
+        let emptyPoints = Pivot.getEmptyPoints(board);
+        return { bestPivot: emptyPoints[Math.floor(Math.random() * emptyPoints.length)], max: Game.RANDOMPLAY }
+    }
+    else {
+        for (let row = 0; row < board.length; row++) {
+            for (let col = 0; col < board[0].length; col++) {
+                if (board[row][col] == Tile.Blank) {
+                    let fitnessValue = getFitness(board, new Pivot(col, row), tile);
+                    if (fitnessValue > max) {
+                        max = fitnessValue;
+                        bestPivot = new Pivot(col, row);
+                    }
                 }
             }
         }
+        if (bestPivot == null) {
+            let pivots = Pivot.getEmptyPoints(board);
+            if (pivots.length > 0) bestPivot = pivots[Math.floor(Math.random() * pivots.length)];
+        }
+        return { bestPivot: bestPivot, max: max };
     }
-    if (bestPivot == null) {
-        let pivots = Pivot.getEmptyPoints(board);
-        if (pivots.length > 0) bestPivot = pivots[Math.floor(Math.random() * pivots.length)];
-    }
-    return { bestPivot: bestPivot, max: max };
 }
 
 module.exports = BoardMove;

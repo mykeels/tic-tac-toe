@@ -69,11 +69,11 @@ let calcLeft = (board, pivot) => {
         c = board[y + 1][x - 1];
     
     let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
+    if (prod == Game.XWON || (board.length == 3 && prod == Game.XINVALIDWON)) {
         board[y - 1][x - 1] = board[y][x - 1] = board[y + 1][x - 1] = Tile.XInvalid;
         return Tile.X;
     }
-    else if (prod == Game.OWON) {
+    else if (prod == Game.OWON || (board.length == 3 && prod == Game.OINVALIDWON)) {
         board[y - 1][x - 1] = board[y][x - 1] = board[y + 1][x - 1] = Tile.OInvalid;
         return Tile.O;
     }
@@ -87,11 +87,11 @@ let calcRight = (board, pivot) => {
         c = board[y + 1][x + 1];
     
     let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
+    if (prod == Game.XWON || (board.length == 3 && prod == Game.XINVALIDWON)) {
         board[y - 1][x + 1] = board[y][x + 1] = board[y + 1][x + 1] = Tile.XInvalid;
         return Tile.X;
     }
-    else if (prod == Game.OWON) {
+    else if (prod == Game.OWON || (board.length == 3 && prod == Game.OINVALIDWON)) {
         board[y - 1][x + 1] = board[y][x + 1] = board[y + 1][x + 1] = Tile.OInvalid;
         return Tile.O;
     }
@@ -105,11 +105,11 @@ let calcTop = (board, pivot) => {
         c = board[y - 1][x + 1];
     
     let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
+    if (prod == Game.XWON || (board.length == 3 && prod == Game.XINVALIDWON)) {
         board[y - 1][x - 1] = board[y - 1][x] = board[y - 1][x + 1] = Tile.XInvalid;
         return Tile.X;
     }
-    else if (prod == Game.OWON) {
+    else if (prod == Game.OWON || (board.length == 3 && prod == Game.OINVALIDWON)) {
         board[y - 1][x - 1] = board[y - 1][x] = board[y - 1][x + 1] = Tile.OInvalid;
         return Tile.O;
     }
@@ -123,11 +123,11 @@ let calcBottom = (board, pivot) => {
         c = board[y + 1][x + 1];
     
     let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
+    if (prod == Game.XWON || (board.length == 3 && prod == Game.XINVALIDWON)) {
         board[y + 1][x - 1] = board[y + 1][x] = board[y + 1][x + 1] = Tile.XInvalid;
         return Tile.X;
     }
-    else if (prod == Game.OWON) {
+    else if (prod == Game.OWON || (board.length == 3 && prod == Game.OINVALIDWON)) {
         board[y + 1][x - 1] = board[y + 1][x] = board[y + 1][x + 1] = Tile.OInvalid;
         return Tile.O;
     }
@@ -141,11 +141,11 @@ let calcHorizontalMiddle = (board, pivot) => {
         c = board[y][x + 1];
     
     let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
+    if (prod == Game.XWON || (board.length == 3 && prod == Game.XINVALIDWON)) {
         board[y][x - 1] = board[y][x] = board[y][x + 1] = Tile.XInvalid;
         return Tile.X;
     }
-    else if (prod == Game.OWON) {
+    else if (prod == Game.OWON || (board.length == 3 && prod == Game.OINVALIDWON)) {
         board[y][x - 1] = board[y][x] = board[y][x + 1] = Tile.OInvalid;
         return Tile.O;
     }
@@ -159,11 +159,11 @@ let calcVerticalMiddle = (board, pivot) => {
         c = board[y + 1][x];
     
     let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
+    if (prod == Game.XWON || (board.length == 3 && prod == Game.XINVALIDWON)) {
         board[y - 1][x] = board[y][x] = board[y + 1][x] = Tile.XInvalid;
         return Tile.X;
     }
-    else if (prod == Game.OWON) {
+    else if (prod == Game.OWON || (board.length == 3 && prod == Game.OINVALIDWON)) {
         board[y - 1][x] = board[y][x] = board[y + 1][x] = Tile.OInvalid;
         return Tile.O;
     }
@@ -177,11 +177,11 @@ let calcLeftDiagonal = (board, pivot) => {
         c = board[y + 1][x + 1];
     
     let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
+    if (prod == Game.XWON || (board.length == 3 && prod == Game.XINVALIDWON)) {
         board[y - 1][x - 1] = board[y][x] = board[y + 1][x + 1] = Tile.XInvalid;
         return Tile.X;
     }
-    else if (prod == Game.OWON) {
+    else if (prod == Game.OWON || (board.length == 3 && prod == Game.OINVALIDWON)) {
         board[y - 1][x - 1] = board[y][x] = board[y + 1][x + 1] = Tile.OInvalid;
         return Tile.O;
     }
@@ -195,11 +195,11 @@ let calcRightDiagonal = (board, pivot) => {
         c = board[y + 1][x - 1];
     
     let prod = +a * +b * +c;
-    if (prod == Game.XWON) {
+    if (prod == Game.XWON || (board.length == 3 && prod == Game.XINVALIDWON)) {
         board[y - 1][x + 1] = board[y][x] = board[y + 1][x - 1] = Tile.XInvalid;
         return Tile.X;
     }
-    else if (prod == Game.OWON) {
+    else if (prod == Game.OWON || (board.length == 3 && prod == Game.OINVALIDWON)) {
         board[y - 1][x + 1] = board[y][x] = board[y + 1][x - 1] = Tile.OInvalid;
         return Tile.O;
     }
