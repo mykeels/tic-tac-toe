@@ -26,6 +26,9 @@ app.controller("GameCtrl", function ($scope, $http) {
         $scope.tiles = a1;
         return a1;
     }
+    $scope.resetScores = function () {
+        $scope.score = { x: 0, o: 0 }
+    }
     $scope.renewTiles = function () {
         $scope.changeTiles();
         for (var i = 0; i < $scope.size; i++) {

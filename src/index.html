@@ -52,12 +52,12 @@
                         </div>
                     </div>
                     <div class="new-game-box">
-                        <button class="btn btn-new-game btn-block" ng-click="newGame()" >New Game</button><br>
+                        <button class="btn btn-new-game btn-block" ng-click="newGame()" >Reset Board</button><br>
                         <div>
-                            <label><input type="radio" name="game_type" value="local" ng-model="begin_game_type" ng-click="newGame()"> Human</label>
+                            <label><input type="radio" name="game_type" value="local" ng-model="begin_game_type" ng-click="newGame();resetScores()"> Human</label>
                         </div>
                         <div>
-                            <label><input type="radio" name="game_type" value="bot" ng-model="begin_game_type" ng-click="newGame()"> Bot</label>
+                            <label><input type="radio" name="game_type" value="bot" ng-model="begin_game_type" ng-click="newGame();resetScores()"> Bot</label>
                         </div>
                     </div>
                 </div>
