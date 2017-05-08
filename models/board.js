@@ -23,7 +23,7 @@ const Board = function (entry) {
     this.state = null;
     this.getState = () => {
         if (!this.state) this.state = new BoardState(board);
-        state = BoardState.calcScore(board, this.state);
+        this.state = BoardState.calcScore(board, this.state);
         return this.state;
     }
     this.isEmpty = () => board.filter(row => row.filter(tile => tile == Tile.Blank).length == row.length).length == board.length;

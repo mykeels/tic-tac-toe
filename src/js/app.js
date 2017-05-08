@@ -118,8 +118,23 @@ app.controller("GameCtrl", function ($scope, $http) {
         }
         else return false;
     }
+    $scope.blockEmptyTiles = function () {
+        for (var i = 0; i < $scope.tiles.length; i++) {
+            for (var j = 0; j < $scope.tiles[i].length; j++) {
+                var tile = $scope.tiles[i][j];
+                if (tile == 0) $scope.tiles[i][j] = 100;
+            }
+        }
+        console.log("empty tiles blocked", $scope.tiles);
+    }
     $scope.calcGame = function () {
         var score = calcScore($scope.tiles, $scope.score.x, $scope.score.o);
+        if (score.x > $scope.score.x || score.o > $scope.score.o) {
+            //player has won a row
+            if ($scope.tiles.length == 3) {
+                $scope.blockEmptyTiles();
+            }
+        }
         $scope.score.x = score.x;
         $scope.score.o = score.o;
         //$scope.socket.send("hello");
