@@ -66,12 +66,17 @@
             <div class="col-md-9">
                 <!-- right side begins -->
                 <div class="row game">
-                    <div class="row" ng-repeat="row in tiles track by $index">
-                        <div class="col-xs-3 tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'line-height': getTileHeight(tiles.length) + 'px', 'font-size': getFontSize(tiles.length) }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
+                    <div class="row adjust" ng-repeat="row in tiles track by $index">
+                        <div class=" tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'line-height': getTileHeight(tiles.length) + 'px', 'font-size': getFontSize(tiles.length) }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
                             ng-click="play($index, $parent.$index);calcGame()">
-                            <span ng-if="column == 0"></span>
-                            <span ng-if="column == 3 || column == 30" class="tile-x">X<!--<small>{{column}}</small>--></span>
-                            <span ng-if="column == 5 || column == 50" class="tile-o">O<!--<small>{{column}}</small>--></span>
+                            <div class="font-fix">
+                                <span ng-if="column == 0"></span>
+                                <span ng-if="column == 3 || column == 30" class="tile-x">X
+                                    <!--<small>{{column}}</small>--></span>
+                                <span ng-if="column == 5 || column == 50" class="tile-o">O
+                                    <!--<small>{{column}}</small>--></span>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="row">
