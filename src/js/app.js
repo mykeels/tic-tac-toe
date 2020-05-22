@@ -11,7 +11,10 @@ app.controller("GameCtrl", function ($scope, $http) {
     $scope.your_turn = true;
     $scope.network_btn = "Network Game";
     $scope.getTileHeight = (length) => Math.ceil(Math.ceil(screen.width * (length < 6 ? 0.35 : (length < 9 ? 0.32 : 0.3))) / length);
-    $scope.getTileWidth = (length) => 'calc(' + Math.floor(75 / length) + '% - 4px)';
+    $scope.getTileWidth = (length) => {
+        return length < 7 ? 'calc(' + Math.floor(75 / length) + '% - 4px)' :
+            '10%'
+    };
     $scope.getFontSize = (length) => $scope.tileFontSizes[length] || 60;
     $scope.tileFontSizes = { 3: 50, 4: 42, 5: 32, 6: 22, 7: 21, 8: 18, 9: 15, 10: 12 }
     $scope.changeTiles = function () {
