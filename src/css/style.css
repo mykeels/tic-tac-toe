@@ -16,6 +16,8 @@ background: -webkit-linear-gradient(bottom left,#2e68a7,#30a48f); /*Safari 5.1-6
 background: -o-linear-gradient(bottom left,#2e68a7,#30a48f); /*Opera 11.1-12*/
 background: -moz-linear-gradient(bottom left,#2e68a7,#30a48f); /*Fx 3.6-15*/
 background: linear-gradient(bottom left, #2e68a7, #30a48f); /*Standard*/
+min-height: 100vh; 
+background-size: cover
 }
 
 .no-margin {
