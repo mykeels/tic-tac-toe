@@ -125,3 +125,49 @@ background: linear-gradient(bottom left, #2e68a7, #30a48f); /*Standard*/
 .margin-2 {
     margin: 5px;
 }
+.game{
+    width: 100%;
+    margin: auto;
+    padding: 1em;
+}
+.adjust{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media only screen and (max-width: 600px) {
+  .tile{
+      margin: auto 2px ;
+      height: 40px !important;
+        display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center;
+  }
+  .font-fix{
+      font-size: 15px;
+    
+  }
+  .board-size{
+      width: 70%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+}
+@media only screen and (max-width: 900px) {
+ 
+  .board-size{
+      width: 70%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+}
