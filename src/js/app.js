@@ -14,6 +14,7 @@ app.controller("GameCtrl", function ($scope, $http) {
     $scope.getTileWidth = (length) => 'calc(' + Math.floor(75 / length) + '% - 4px)';
     $scope.getFontSize = (length) => $scope.tileFontSizes[length] || 60;
     $scope.tileFontSizes = { 3: 50, 4: 42, 5: 32, 6: 22, 7: 21, 8: 18, 9: 15, 10: 12 }
+    $scope.getTileClass = () => 'tile-'.concat($scope.size);
     $scope.changeTiles = function () {
         var a1 = [];
         for (var i = 0; i < $scope.size; i++) {

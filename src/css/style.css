@@ -91,6 +91,42 @@ background: linear-gradient(bottom left, #2e68a7, #30a48f); /*Standard*/
     border: 2px outset #6EA4BC;
 }
 
+@media (max-width: 750px) {
+    .tile.tile-10 {
+        width: 8%;
+        margin: 0.01em;
+    }
+
+    .tile-o, .tile-x {
+        font-size: 1.5em;
+        height: 50%;
+    }
+
+    .tile {
+        height: 3em;
+    }
+
+    .board-size {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    body > div.container {
+        padding: 2em 0;
+    }
+}
+
+.tile {
+    width: 5em;
+    min-width: 2em;
+    height: 5em;
+}
+
+.tile-o, .tile-x {
+    font-size: 2em;
+}
+
 .tile.disabled {
     background-color: #ACD1D7 !important;
     color: #fff;
