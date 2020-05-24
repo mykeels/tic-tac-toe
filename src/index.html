@@ -66,8 +66,8 @@
             <div class="col-md-9">
                 <!-- right side begins -->
                 <div class="row game">
-                    <div class="row adjust" ng-repeat="row in tiles track by $index">
-                        <div class=" tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': getTileHeight(tiles.length) + 'px', 'line-height': getTileHeight(tiles.length) + 'px', 'font-size': getFontSize(tiles.length) }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
+                    <div class="row adjust" ng-style="{ 'height': getRowContainerHeight(tiles.length) }" ng-repeat="row in tiles track by $index">
+                        <div class=" tile margin-2" ng-style="{ 'width': getTileWidth(tiles.length), 'height': '100%', 'line-height': getTileLineHeight(tiles.length) + 'px', 'font-size': getFontSize(tiles.length) }" ng-class="{ 'disabled' : column != '0'.toNumber(), 'x-won': column == 30, 'o-won': column == 50 }" ng-repeat="column in row track by $index"
                             ng-click="play($index, $parent.$index);calcGame()">
                             <div class="font-fix">
                                 <span ng-if="column == 0"></span>
